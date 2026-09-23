@@ -59,12 +59,10 @@ function renderUsers() {
     });
 }
 
-// Switch Views with smooth animation
+//switch views!
 function switchView(hideView, showView) {
     hideView.classList.remove('active');
-    setTimeout(() => {
-        showView.classList.add('active');
-    }, 250); // slight delay to wait for opacity transition
+    showView.classList.add('active');
 }
 
 // Open Notes for a specific user
