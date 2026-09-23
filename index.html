@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaNota!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1 class="brand">LaNota!</h1>
+            <p class="subtitle">Write however you like</p>
+        </header>
+
+        <main class="content-wrapper">
+            <!-- User Selection Screen -->
+            <section id="user-view" class="view active">
+                <h2>Who is writing today?</h2>
+                <div class="input-group">
+                    <input type="text" id="new-user-input" placeholder="Enter user name (e.g., dolla)" autocomplete="off">
+                    <button id="add-user-btn">Create User</button>
+                </div>
+                <div class="list-container">
+                    <h3>Existing Users</h3>
+                    <ul id="user-list" class="user-list">
+                        <!-- Users will be injected here via JS -->
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Notes Management Screen -->
+            <section id="notes-view" class="view">
+                <div class="notes-header">
+                    <button id="back-btn" class="outline-btn">← Back to Users</button>
+                    <h2 id="current-user-title">Notes</h2>
+                </div>
+                
+                <div class="input-group column">
+                    <textarea id="new-note-input" placeholder="Write your note here..."></textarea>
+                    <button id="add-note-btn">Save Note</button>
+                </div>
+                
+                <div class="list-container">
+                    <div id="notes-list" class="notes-grid">
+                        <!-- Notes will be injected here via JS -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
