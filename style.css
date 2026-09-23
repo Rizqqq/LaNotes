@@ -8,22 +8,20 @@
 }
 
 body {
-    /* Purple to Blue gradient */
     background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
     color: #ffffff;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow-x: hidden;
-    padding: 1rem 0; /* Prevents container from touching top/bottom on short mobile screens */
+    padding: 1.5rem 1rem;
 }
 
 .app-container {
     width: 100%;
-    max-width: 850px;
-    padding: 1.25rem;
+    max-width: 800px;
     text-align: center;
+    margin: auto;
 }
 
 header {
@@ -31,16 +29,15 @@ header {
     animation: fadeInDown 0.8s ease-out;
 }
 
-/* Fluid typography: scales nicely between 2.2rem and 3.5rem */
 .brand {
-    font-size: clamp(2.2rem, 6vw, 3.5rem);
+    font-size: clamp(2.3rem, 7vw, 3.5rem);
     font-weight: 600;
     letter-spacing: 2px;
     text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .subtitle {
-    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    font-size: clamp(1rem, 3vw, 1.2rem);
     font-weight: 300;
     opacity: 0.9;
 }
@@ -54,37 +51,28 @@ header {
     border-radius: 20px;
     padding: 2rem;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-    position: relative;
-    min-height: 380px;
-    overflow: hidden;
+    width: 100%;
+    /* Removed overflow: hidden so mobile view isn't cut off */
 }
 
-/* View Animations */
+/* View Control (Fixes view vanishing/overflow bug) */
 .view {
-    position: absolute;
-    top: 2rem;
-    left: 2rem;
-    right: 2rem;
+    display: none;
     opacity: 0;
-    visibility: hidden;
-    transform: translateX(40px);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .view.active {
-    position: relative;
-    top: 0;
-    left: 0;
-    right: 0;
+    display: block;
     opacity: 1;
-    visibility: visible;
-    transform: translateX(0);
+    transform: translateY(0);
 }
 
 /* Inputs & Buttons */
 .input-group {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     margin: 1.5rem 0;
 }
 
@@ -100,9 +88,9 @@ input[type="text"], textarea {
     border-radius: 10px;
     background: rgba(255, 255, 255, 0.2);
     color: white;
-    font-size: 16px; /* 16px prevents iOS Safari from auto-zooming */
+    font-size: 16px; /* 16px is required so iOS Safari doesn't zoom in */
     outline: none;
-    transition: background 0.3s ease, box-shadow 0.3s ease;
+    transition: background 0.3s ease;
 }
 
 input[type="text"]::placeholder, textarea::placeholder {
@@ -111,12 +99,11 @@ input[type="text"]::placeholder, textarea::placeholder {
 
 input[type="text"]:focus, textarea:focus {
     background: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
 textarea {
     resize: vertical;
-    min-height: 110px;
+    min-height: 100px;
 }
 
 button {
@@ -129,16 +116,10 @@ button {
     font-weight: 600;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    white-space: nowrap;
-}
-
-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 button:active {
-    transform: translateY(0);
+    transform: scale(0.98);
 }
 
 .outline-btn {
@@ -156,7 +137,7 @@ button:active {
 
 /* Lists and Notes Grid */
 .list-container {
-    margin-top: 1.8rem;
+    margin-top: 1.5rem;
     text-align: left;
 }
 
@@ -176,13 +157,12 @@ button:active {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    word-break: break-word;
-    transition: background 0.3s ease, transform 0.3s ease;
+    word-break: break-all;
+    transition: background 0.3s ease;
 }
 
 .user-list li:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: translateX(5px);
+    background: rgba(255, 255, 255, 0.25);
 }
 
 .notes-header {
@@ -193,7 +173,6 @@ button:active {
     flex-wrap: wrap;
 }
 
-/* Tablet & Desktop Grid: auto-fills columns with at least 220px */
 .notes-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -207,9 +186,8 @@ button:active {
     border-left: 4px solid #ffffff;
     text-align: left;
     white-space: pre-wrap;
-    word-wrap: break-word;
+    word-break: break-word;
     overflow-wrap: break-word;
-    animation: fadeIn 0.4s ease-out;
 }
 
 .note-date {
@@ -219,54 +197,36 @@ button:active {
     display: block;
 }
 
-/* ============================================================
-   RESPONSIVE BREAKPOINTS (Tablets & Phones)
-============================================================ */
+/* ==========================================
+   MOBILE & TABLET RESPONSIVE RULES
+========================================== */
 
-/* Tablet and small laptops */
+/* Tablets */
 @media (max-width: 768px) {
     .content-wrapper {
-        padding: 1.75rem;
-    }
-
-    .view {
-        top: 1.75rem;
-        left: 1.75rem;
-        right: 1.75rem;
+        padding: 1.5rem;
     }
 }
 
-/* Mobile Phones (up to 480px) */
+/* Phones */
 @media (max-width: 480px) {
     body {
-        align-items: flex-start; /* Better scroll feeling on small screens */
-        padding: 0.5rem 0;
-    }
-
-    .app-container {
-        padding: 0.75rem;
+        align-items: flex-start; /* Allows natural scrolling down on phones */
+        padding: 1rem 0.5rem;
     }
 
     .content-wrapper {
-        padding: 1.25rem;
+        padding: 1.2rem;
         border-radius: 16px;
-        min-height: auto; /* Lets it shrink or expand naturally */
     }
 
-    .view {
-        top: 1.25rem;
-        left: 1.25rem;
-        right: 1.25rem;
-    }
-
-    /* Stack input and button vertically on phones */
+    /* Stack buttons under inputs on small phone screens */
     .input-group {
         flex-direction: column;
     }
 
     button {
-        width: 100%; /* Easy to tap with thumbs */
-        padding: 12px;
+        width: 100%;
     }
 
     .notes-header {
@@ -278,19 +238,13 @@ button:active {
         text-align: center;
     }
 
-    /* Notes become a single column feed on phones */
+    /* 1 note per row on phone */
     .notes-grid {
         grid-template-columns: 1fr;
     }
 }
 
-/* Keyframes */
 @keyframes fadeInDown {
     from { opacity: 0; transform: translateY(-20px); }
     to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.96); }
-    to { opacity: 1; transform: scale(1); }
 }
